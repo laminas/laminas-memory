@@ -1,14 +1,12 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Memory
+ * @see       https://github.com/laminas/laminas-memory for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-memory/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-memory/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Memory;
+namespace Laminas\Memory;
 
 use ArrayAccess;
 use Countable;
@@ -19,8 +17,8 @@ use Countable;
  * It's an OO string wrapper.
  * Used to intercept string updates.
  *
- * @category   Zend
- * @package    Zend_Memory
+ * @category   Laminas
+ * @package    Laminas_Memory
  */
 class Value implements ArrayAccess, Countable
 {
@@ -50,7 +48,7 @@ class Value implements ArrayAccess, Countable
      * Object constructor
      *
      * @param string $value
-     * @param \Zend\Memory\Container\Movable $container
+     * @param \Laminas\Memory\Container\Movable $container
      */
     public function __construct($value, Container\Movable $container)
     {
