@@ -1,12 +1,11 @@
 docs_dir: docs/book
 site_dir: docs/html
-pages:
+nav:
     - index.md
     - Intro: intro.md
     - Reference:
         - "Memory Manager": memory-manager.md
         - "Memory Objects": memory-objects.md
-site_name: zend-memory
-site_description: zend-memory
-repo_url: 'https://github.com/zendframework/zend-memory'
-copyright: 'Copyright (c) 2005-2018 <a href="https://www.zend.com/">Zend Technologies USA Inc.</a>'
+site_name: laminas-memory
+site_description: laminas-memory
+repo_url: 'https://github.com/laminas/laminas-memory'

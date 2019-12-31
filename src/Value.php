@@ -1,11 +1,12 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-memory for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-memory/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-memory for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-memory/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-memory/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Memory;
+namespace Laminas\Memory;
 
 use ArrayAccess;
 use Countable;
@@ -44,7 +45,7 @@ class Value implements ArrayAccess, Countable
      * Object constructor
      *
      * @param string $value
-     * @param \Zend\Memory\Container\Movable $container
+     * @param \Laminas\Memory\Container\Movable $container
      */
     public function __construct($value, Container\Movable $container)
     {
