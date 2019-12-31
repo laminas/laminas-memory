@@ -1,20 +1,19 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-memory for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-memory/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-memory/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Memory;
+namespace LaminasTest\Memory;
 
-use Zend\Cache\StorageFactory as CacheFactory;
-use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
-use Zend\Memory;
+use Laminas\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
+use Laminas\Cache\StorageFactory as CacheFactory;
+use Laminas\Memory;
 
 /**
- * @group      Zend_Memory
+ * @group      Laminas_Memory
  */
 class MemoryManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -37,12 +36,12 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
     {
         /** Without caching */
         $memoryManager = new Memory\MemoryManager();
-        $this->assertInstanceOf('Zend\Memory\MemoryManager', $memoryManager);
+        $this->assertInstanceOf('Laminas\Memory\MemoryManager', $memoryManager);
         unset($memoryManager);
 
         /** Caching using 'File' backend */
         $memoryManager = new Memory\MemoryManager($this->_cache);
-        $this->assertInstanceOf('Zend\Memory\MemoryManager', $memoryManager);
+        $this->assertInstanceOf('Laminas\Memory\MemoryManager', $memoryManager);
         unset($memoryManager);
     }
 
@@ -71,19 +70,19 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
         $memoryManager = new Memory\MemoryManager($this->_cache);
 
         $memObject1 = $memoryManager->create('Value of object 1');
-        $this->assertInstanceOf('Zend\Memory\Container\AccessController', $memObject1);
+        $this->assertInstanceOf('Laminas\Memory\Container\AccessController', $memObject1);
         $this->assertEquals($memObject1->getRef(), 'Value of object 1');
 
         $memObject2 = $memoryManager->create();
-        $this->assertInstanceOf('Zend\Memory\Container\AccessController', $memObject2);
+        $this->assertInstanceOf('Laminas\Memory\Container\AccessController', $memObject2);
         $this->assertEquals($memObject2->getRef(), '');
 
         $memObject3 = $memoryManager->createLocked('Value of object 3');
-        $this->assertInstanceOf('Zend\Memory\Container\Locked', $memObject3);
+        $this->assertInstanceOf('Laminas\Memory\Container\Locked', $memObject3);
         $this->assertEquals($memObject3->getRef(), 'Value of object 3');
 
         $memObject4 = $memoryManager->createLocked();
-        $this->assertInstanceOf('Zend\Memory\Container\Locked', $memObject4);
+        $this->assertInstanceOf('Laminas\Memory\Container\Locked', $memObject4);
         $this->assertEquals($memObject4->getRef(), '');
     }
 
@@ -129,7 +128,7 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
             $memObjects[] = $memObject;
         }
 
-        $this->setExpectedException('Zend\Memory\Exception\RuntimeException');
+        $this->setExpectedException('Laminas\Memory\Exception\RuntimeException');
         $memoryManager->create('a');
     }
 }
