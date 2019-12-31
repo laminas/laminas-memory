@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage data in an environment with limited memory">  
+    <link rel="canonical" href="https://docs.laminas.dev/memory-objects/">
+    <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>Memory Objects - laminas-memory - Laminas Docs</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body id="page-top" class="components">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-memory</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../memory-manager/" class="subnavigation__link">Memory Manager</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Memory Objects</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-6 offset-md-2">
+                <h1 class="header__title">
+                    Components
+
+                    
+                        <small class="header__subtitle">laminas-memory</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-sm-right">
+                
+                    
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-memory/" class="header__link header__link--github" title="Go to repository of laminas-memory">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-12">
+                
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#movable" class="toc__link">Movable</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#locked" class="toc__link">Locked</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#memory-container-value-property" class="toc__link">Memory container 'value' property</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#memory-container-interface" class="toc__link">Memory container interface</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+            </div>
+            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="">Overview</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="..">laminas-memory</a></li>
+
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Reference</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Memory Objects</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Reference</h2>
+    
+
+    <h1 id="memory-objects">Memory Objects</h1>
+<h2 id="movable">Movable</h2>
+<p>"Movable" memory objects are ones that may be swapped into the cache backend and
+unloaded from memory when not in active use.</p>
+<p>Create movable memory objects using the <code>create([$data])</code> method of the memory
+manager:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$memObject = $memoryManager-&gt;create($data);</span>
+</pre></div></p>
+<p>Such objects will be retrieved from the cache and/or memor when accessed again.</p>
+<h2 id="locked">Locked</h2>
+<p>"Locked" memory objects will never be swapped to cache or unloaded from memory.</p>
+<p>Create locked memory objects using the <code>createLocked([$data])</code> method of the
+memory manager:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$memObject = $memoryManager-&gt;createLocked($data);</span>
+</pre></div></p>
+<p>Locked objects implement the same interface as movable objects
+(<code>Laminas\Memory\Container\Interface</code>), and can be used interchangably with movable
+objects. Use them when you have performance considerations that dictate keeping
+the information in memory. Access to locked objects is faster, because the
+memory manager doesn't need to track changes for these objects.</p>
+<p>The locked objects class (<code>Laminas\Memory\Container\Locked</code>) guarantees virtually
+the same performance as working with a string variable. The overhead is a single
+dereference to get the class property.</p>
+<h2 id="memory-container-value-property">Memory container 'value' property</h2>
+<p>Use the memory container (movable or locked) <code>value</code> property to operate with
+memory object data:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$memObject = $memoryManager-&gt;create($data);</span>
+
+<span class=x>echo $memObject-&gt;value;</span>
+
+<span class=x>$memObject-&gt;value = $newValue;</span>
+
+<span class=x>$memObject-&gt;value[$index] = &#39;_&#39;;</span>
+
+<span class=x>echo ord($memObject-&gt;value[$index1]);</span>
+
+<span class=x>$memObject-&gt;value = substr($memObject-&gt;value, $start, $length);</span>
+</pre></div></p>
+<p>An alternative way to access memory object data is to use the
+<a href="#getref-method">getRef()</a>; method.</p>
+<h2 id="memory-container-interface">Memory container interface</h2>
+<p>Each memory container type provides the following methods:</p>
+<h3>getRef() method</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>&amp;getRef() : mixed</span>
+</pre></div></p>
+<p>The <code>getRef()</code> method returns a reference to the object value.</p>
+<p>Movable objects are loaded from the cache at this moment if the object is not
+already in memory. If the object is loaded from the cache, this might cause
+swapping of other objects if the memory limit would be exceeded by having all
+the managed objects in memory.</p>
+<p>Tracking changes to data needs additional resources. The <code>getRef()</code> method
+returns a reference to the string value used to store the data, which is changed
+directly by user application. Use the <code>getRef()</code> method for value data
+processing where you want to ensure the data changes without necessarily
+interacting directly with the memory container:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$memObject = $memoryManager-&gt;create($data);</span>
+
+<span class=x>$value = &amp;$memObject-&gt;getRef();</span>
+
+<span class=x>for ($count = 0; $count &lt; strlen($value); $count++) {</span>
+<span class=x>    $char = $value[$count];</span>
+<span class=x>    // ...</span>
+<span class=x>}</span>
+</pre></div></p>
+<h3>touch() method</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>touch() : void</span>
+</pre></div></p>
+<p>The <code>touch()</code> method should be used in conjunction with <code>getRef()</code>. It signals
+that object value has been changed:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$memObject = $memoryManager-&gt;create($data);</span>
+<span class=x>...</span>
+
+<span class=x>$value = &amp;$memObject-&gt;getRef();</span>
+
+<span class=x>for ($count = 0; $count &lt; strlen($value); $count++) {</span>
+<span class=x>    // ...</span>
+<span class=x>    if ($condition) {</span>
+<span class=x>        $value[$count] = $char;</span>
+<span class=x>    }</span>
+<span class=x>    // ...</span>
+<span class=x>}</span>
+
+<span class=x>$memObject-&gt;touch();</span>
+</pre></div></p>
+<h3>lock() method</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>lock() : void</span>
+</pre></div></p>
+<p>The <code>lock()</code> methods locks the object in memory. It should be used to prevent
+swapping of the object.  Normally, this is not necessary, because the memory
+manager uses an intelligent algorithm to choose candidates for swapping. But if
+you know that at a specific point in the code an object should not be swapped,
+you may lock it.</p>
+<p>Locking objects in memory also guarantees that the reference returned by the
+<code>getRef()</code> method is valid until you unlock the object:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$memObject1 = $memoryManager-&gt;create($data1);</span>
+<span class=x>$memObject2 = $memoryManager-&gt;create($data2);</span>
+<span class=x>...</span>
+
+<span class=x>$memObject1-&gt;lock();</span>
+<span class=x>$memObject2-&gt;lock();</span>
+
+<span class=x>$value1 = &amp;$memObject1-&gt;getRef();</span>
+<span class=x>$value2 = &amp;$memObject2-&gt;getRef();</span>
+
+<span class=x>for ($count = 0; $count &lt; strlen($value2); $count++) {</span>
+<span class=x>    $value1 .= $value2[$count];</span>
+<span class=x>}</span>
+
+<span class=x>$memObject1-&gt;touch();</span>
+<span class=x>$memObject1-&gt;unlock();</span>
+<span class=x>$memObject2-&gt;unlock();</span>
+</pre></div></p>
+<h3>unlock() method</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>unlock() : void</span>
+</pre></div></p>
+<p>The <code>unlock()</code> method unlocks object when it's no longer necessary to be locked.
+See the example above.</p>
+<h3>isLocked() method</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>isLocked() : bool</span>
+</pre></div></p>
+<p>The <code>isLocked()</code> method can be used to check if object is locked. It returns
+<code>true</code> if the object is locked, or <code>false</code> if it is not locked. This is always
+<code>true</code> for "locked" objects, and may be either <code>true</code> or <code>false</code> for "movable"
+objects.</p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../memory-manager/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-memory/edit/master/docs/book/memory-objects.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-memory</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../memory-manager/" class="subnavigation__link">Memory Manager</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Memory Objects</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 offset-md-2">
+                <h5>Laminas</h5>
+                <ul>
+                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
+                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-4 offset-md-2">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">License</h4>
+                <p>
+                    Code licensed under <a
+                        href="https://github.com/laminas/laminas-memory//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                </p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>
+                    <!--Built with love by the Laminas team with the help of our
+                    <a href="https://github.com/laminas/laminas-memory//graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '..',
+            project  = "components",
+            siteName = 'laminas-memory';
+    </script>
+    <script src="/js/scripts.js"></script>
+        <script src="../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-memory" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>
