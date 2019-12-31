@@ -1,21 +1,20 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-memory for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-memory/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-memory/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Memory;
+namespace LaminasTest\Memory;
 
-use Zend\Cache\StorageFactory as CacheFactory;
-use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
-use Zend\Memory;
-use Zend\Memory\Container;
+use Laminas\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
+use Laminas\Cache\StorageFactory as CacheFactory;
+use Laminas\Memory;
+use Laminas\Memory\Container;
 
 /**
- * @group      Zend_Memory
+ * @group      Laminas_Memory
  */
 class AccessControllerTest extends \PHPUnit_Framework_TestCase
 {
@@ -39,7 +38,7 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
         $memoryManager  = new Memory\MemoryManager($this->_cache);
         $memObject      = $memoryManager->create('012345678');
 
-        $this->assertTrue($memObject instanceof \Zend\Memory\Container\AccessController);
+        $this->assertTrue($memObject instanceof \Laminas\Memory\Container\AccessController);
     }
 
     /**
@@ -64,7 +63,7 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals((string) $memObject->value, '012_456_89');
 
         $memObject->value = 'another value';
-        $this->assertTrue($memObject->value instanceof \Zend\Memory\Value);
+        $this->assertTrue($memObject->value instanceof \Laminas\Memory\Value);
         $this->assertEquals((string) $memObject->value, 'another value');
     }
 
