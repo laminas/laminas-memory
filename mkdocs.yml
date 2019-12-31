@@ -1,11 +1,12 @@
 docs_dir: docs/book
 site_dir: docs/html
 nav:
-    - Home: index.md
-    - Introduction: intro.md
-    - Reference:
-        - "Memory Manager": memory-manager.md
-        - "Memory Objects": memory-objects.md
+    - { Home: index.md }
+    - { Introduction: intro.md }
+    - { Reference: [{ 'Memory Manager': memory-manager.md }, { 'Memory Objects': memory-objects.md }] }
 site_name: laminas-memory
-site_description: "Manage data in an environment with limited memory"
+site_description: 'Manage data in an environment with limited memory'
 repo_url: 'https://github.com/laminas/laminas-memory'
+extra:
+    project: Components
+    project_url: 'https://docs.laminas.dev'
