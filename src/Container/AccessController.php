@@ -1,11 +1,12 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-memory for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-memory/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-memory for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-memory/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-memory/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Memory\Container;
+namespace Laminas\Memory\Container;
 
 /**
  * Memory object container access controller.
@@ -17,7 +18,7 @@ namespace Zend\Memory\Container;
  * It's not referenced by memory manager and class destructor is invoked immediately after going
  * out of scope or unset operation.
  *
- * Class also provides Zend\Memory\Container interface and works as proxy for such cases.
+ * Class also provides Laminas\Memory\Container interface and works as proxy for such cases.
  */
 class AccessController implements ContainerInterface
 {
