@@ -26,12 +26,12 @@ $memObject = $memoryManager->createLocked($data);
 ```
 
 Locked objects implement the same interface as movable objects
-(`Zend\Memory\Container\Interface`), and can be used interchangably with movable
+(`Laminas\Memory\Container\Interface`), and can be used interchangably with movable
 objects. Use them when you have performance considerations that dictate keeping
 the information in memory. Access to locked objects is faster, because the
 memory manager doesn't need to track changes for these objects.
 
-The locked objects class (`Zend\Memory\Container\Locked`) guarantees virtually
+The locked objects class (`Laminas\Memory\Container\Locked`) guarantees virtually
 the same performance as working with a string variable. The overhead is a single
 dereference to get the class property.
 

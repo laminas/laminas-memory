@@ -1,39 +1,49 @@
 {
-    "name": "zendframework/zend-memory",
+    "name": "laminas/laminas-memory",
     "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf2",
+        "laminas",
         "memory"
     ],
-    "homepage": "https://github.com/zendframework/zend-memory",
-    "autoload": {
-        "psr-4": {
-            "Zend\\Memory\\": "src/"
-        }
+    "homepage": "https://laminas.dev",
+    "support": {
+        "docs": "https://docs.laminas.dev/laminas-memory/",
+        "issues": "https://github.com/laminas/laminas-memory/issues",
+        "source": "https://github.com/laminas/laminas-memory",
+        "rss": "https://github.com/laminas/laminas-memory/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
-    "require": {
-        "php": "^5.5 || ^7.0"
+    "config": {
+        "sort-packages": true
     },
-    "require-dev": {
-        "zendframework/zend-cache": "^2.7",
-        "squizlabs/php_codesniffer": "^2.3.1",
-        "phpunit/PHPUnit": "^4.8"
-    },
-    "suggest": {
-        "zendframework/zend-cache": "To support swapping memory objects into and out of non-memory cache storage"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "2.5-dev",
             "dev-develop": "2.6-dev"
         }
     },
+    "require": {
+        "php": "^5.5 || ^7.0",
+        "laminas/laminas-zendframework-bridge": "^1.0"
+    },
+    "require-dev": {
+        "laminas/laminas-cache": "^2.7",
+        "phpunit/phpunit": "^4.8",
+        "squizlabs/php_codesniffer": "^2.3.1"
+    },
+    "suggest": {
+        "laminas/laminas-cache": "To support swapping memory objects into and out of non-memory cache storage"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\Memory\\": "src/"
+        }
+    },
     "autoload-dev": {
         "psr-4": {
-            "ZendTest\\Memory\\": "test/"
+            "LaminasTest\\Memory\\": "test/"
         }
     },
     "scripts": {
@@ -46,5 +56,8 @@
         "cs-fix": "phpcbf",
         "test": "phpunit",
         "test-coverage": "phpunit --coverage-clover clover.xml"
+    },
+    "replace": {
+        "zendframework/zend-memory": "self.version"
     }
 }

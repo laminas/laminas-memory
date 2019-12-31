@@ -6,9 +6,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#11](https://github.com/zendframework/zend-memory/pull/11) and
-  [#12](https://github.com/zendframework/zend-memory/pull/12) add and publish
-  the documentation to https://zendframework.github.io/zend-memory/
+- [zendframework/zend-memory#11](https://github.com/zendframework/zend-memory/pull/11) and
+  [zendframework/zend-memory#12](https://github.com/zendframework/zend-memory/pull/12) add and publish
+  the documentation to https://docs.laminas.dev/laminas-memory/
 
 ### Deprecated
 
@@ -20,6 +20,6 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#12](https://github.com/zendframework/zend-memory/pull/12) updates the
-  PHP requirement to allow either 5.5+ or 7.0+, and pins the zend-cache version
+- [zendframework/zend-memory#12](https://github.com/zendframework/zend-memory/pull/12) updates the
+  PHP requirement to allow either 5.5+ or 7.0+, and pins the laminas-cache version
   for testing to 2.7+.
