@@ -1,17 +1,18 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-memory for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-memory/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-memory for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-memory/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-memory/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Memory;
+namespace LaminasTest\Memory;
 
+use Laminas\Memory;
 use PHPUnit\Framework\TestCase;
-use Zend\Memory;
 
 /**
- * @group      Zend_Memory
+ * @group      Laminas_Memory
  */
 class ValueTest extends TestCase
 {

@@ -2,17 +2,17 @@
 
 ## Creating a Memory Manager
 
-You can create new a memory manager (`Zend\Memory\MemoryManager` object) using its constructor:
+You can create new a memory manager (`Laminas\Memory\MemoryManager` object) using its constructor:
 
 ```php
-__construct(Zend\Cache\Storage\StorageInterface $cache = null) : void
+__construct(Laminas\Cache\Storage\StorageInterface $cache = null) : void
 ```
 
 As an example, the following creates an instance which *is not* backed by cache
 storage:
 
 ```php
-$memoryManager = new Zend\Memory\MemoryManager();
+$memoryManager = new Laminas\Memory\MemoryManager();
 ```
 
 While the following creates an instance backed by a filesystem cache storage
@@ -20,8 +20,8 @@ adapter, storing memory blocks in the `tmp/` directory of the current working
 directory:
 
 ```php
-use Zend\Cache\StorageFactory;
-use Zend\Memory\MemoryManager;
+use Laminas\Cache\StorageFactory;
+use Laminas\Memory\MemoryManager;
 
 $cache = StorageFactory::factory([
     'adapter' => [
@@ -35,7 +35,7 @@ $cache = StorageFactory::factory([
 $memoryManager = new MemoryManager($cache);
 ```
 
-The `MemoryManager` uses [zend-cache storage adapters](http://docs.zendframework.com/zend-cache/storage/adapter/)
+The `MemoryManager` uses [laminas-cache storage adapters](http://docs.laminas.dev/laminas-cache/storage/adapter/)
 to cache memory blocks; if no cache instance is provided, the system temporary
 directory is used. This is useful if you know that memory is not limited or the
 overall size of objects never reaches the memory limit.
@@ -48,7 +48,7 @@ and settings to control memory manager behavior.
 ### Creating Movable Objects
 
 Create movable objects (objects which may be swapped into cache storage) using
-the `Zend\Memory\MemoryManager::create([$data])` method:
+the `Laminas\Memory\MemoryManager::create([$data])` method:
 
 ```php
 $memObject = $memoryManager->create($data);
@@ -60,7 +60,7 @@ The `$data` argument is optional and used to initialize the object value. If the
 ### Creating Locked Objects
 
 Create locked objects (objects which will never be swapped into cache storage)
-using the `Zend\Memory\MemoryManager::createLocked([$data])` method:
+using the `Laminas\Memory\MemoryManager::createLocked([$data])` method:
 
 ```php
 $memObject = $memoryManager->createLocked($data);

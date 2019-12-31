@@ -1,14 +1,15 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-memory for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-memory/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-memory for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-memory/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-memory/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Memory\Container;
+namespace Laminas\Memory\Container;
 
-use Zend\Memory;
-use Zend\Memory\Exception;
+use Laminas\Memory;
+use Laminas\Memory\Exception;
 
 /**
  * Memory value container
@@ -27,14 +28,14 @@ class Movable extends AbstractContainer
     /**
      * Memory manager reference
      *
-     * @var \Zend\Memory\MemoryManager
+     * @var \Laminas\Memory\MemoryManager
      */
     private $memManager;
 
     /**
      * Value object
      *
-     * @var \Zend\Memory\Value
+     * @var \Laminas\Memory\Value
      */
     private $value;
 
@@ -53,7 +54,7 @@ class Movable extends AbstractContainer
     /**
      * Object constructor
      *
-     * @param \Zend\Memory\MemoryManager $memoryManager
+     * @param \Laminas\Memory\MemoryManager $memoryManager
      * @param int $id
      * @param string $value
      */
