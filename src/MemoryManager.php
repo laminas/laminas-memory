@@ -1,17 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-memory for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-memory/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-memory/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Memory;
+namespace Laminas\Memory;
 
-use Zend\Cache\Storage\ClearByNamespaceInterface as ClearByNamespaceCacheStorage;
-use Zend\Cache\Storage\FlushableInterface as FlushableCacheStorage;
-use Zend\Cache\Storage\StorageInterface as CacheStorage;
+use Laminas\Cache\Storage\ClearByNamespaceInterface as ClearByNamespaceCacheStorage;
+use Laminas\Cache\Storage\FlushableInterface as FlushableCacheStorage;
+use Laminas\Cache\Storage\StorageInterface as CacheStorage;
 
 /**
  * Memory manager
@@ -54,7 +53,7 @@ class MemoryManager
     private $memorySize = 0;
 
     /**
-     * Id for next Zend\Memory object
+     * Id for next Laminas\Memory object
      *
      * @var int
      */
@@ -93,7 +92,7 @@ class MemoryManager
      * object.
      * So we have to trace only _first_ object modification and do nothing for others
      *
-     * @var \Zend\Memory\Container\Movable
+     * @var \Laminas\Memory\Container\Movable
      */
     private $lastModified = null;
 
@@ -115,7 +114,7 @@ class MemoryManager
          * it should be changed by something else
          * (Ex. backend interface should be extended to provide this functionality)
          */
-        $this->managerId = str_replace('.', '_', uniqid('ZendMemManager', true)) . '_';
+        $this->managerId = str_replace('.', '_', uniqid('LaminasMemManager', true)) . '_';
     }
 
     /**
@@ -214,7 +213,7 @@ class MemoryManager
     }
 
     /**
-     * Create new Zend\Memory value container
+     * Create new Laminas\Memory value container
      *
      * @param string $value
      * @return Container\ContainerInterface
@@ -226,7 +225,7 @@ class MemoryManager
     }
 
     /**
-     * Create new Zend\Memory value container, which has value always
+     * Create new Laminas\Memory value container, which has value always
      * locked in memory
      *
      * @param string $value
@@ -239,12 +238,12 @@ class MemoryManager
     }
 
     /**
-     * Create new Zend\Memory object
+     * Create new Laminas\Memory object
      *
      * @param string $value
      * @param  bool $locked
-     * @return \Zend\Memory\Container\ContainerInterface
-     * @throws \Zend\Memory\Exception\ExceptionInterface
+     * @return \Laminas\Memory\Container\ContainerInterface
+     * @throws \Laminas\Memory\Exception\ExceptionInterface
      */
     private function _create($value, $locked)
     {
@@ -298,7 +297,7 @@ class MemoryManager
      * Process value update
      *
      * @internal
-     * @param \Zend\Memory\Container\Movable $container
+     * @param \Laminas\Memory\Container\Movable $container
      * @param int $id
      */
     public function processUpdate(Container\Movable $container, $id)
@@ -385,7 +384,7 @@ class MemoryManager
      * Actually swaps data or only unloads it from memory,
      * if object is not changed since last swap
      *
-     * @param \Zend\Memory\Container\Movable $container
+     * @param \Laminas\Memory\Container\Movable $container
      * @param int $id
      */
     private function _swap(Container\Movable $container, $id)
@@ -408,7 +407,7 @@ class MemoryManager
      * Load value from swap file.
      *
      * @internal
-     * @param \Zend\Memory\Container\Movable $container
+     * @param \Laminas\Memory\Container\Movable $container
      * @param int $id
      */
     public function load(Container\Movable $container, $id)
