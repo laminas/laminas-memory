@@ -1,6 +1,6 @@
 # laminas-memory
 
-[![Build Status](https://travis-ci.org/laminas/laminas-memory.svg?branch=master)](https://travis-ci.org/laminas/laminas-memory)
+[![Build Status](https://travis-ci.com/laminas/laminas-memory.svg?branch=master)](https://travis-ci.com/laminas/laminas-memory)
 [![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-memory/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-memory?branch=master)
 
 laminas-memory manages data in an environment with limited memory.
