@@ -11,4 +11,3 @@ site_description: "Manage data in an environment with limited memory"
 repo_url: 'https://github.com/laminas/laminas-memory'
 extra:
     project: Components
-    project_url: 'https://docs.laminas.dev'
