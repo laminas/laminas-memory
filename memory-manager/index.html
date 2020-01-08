@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -227,29 +231,26 @@
     <h1 id="memory-manager">Memory Manager</h1>
 <h2 id="creating-a-memory-manager">Creating a Memory Manager</h2>
 <p>You can create new a memory manager (<code>Laminas\Memory\MemoryManager</code> object) using its constructor:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>__construct(Laminas\Cache\Storage\StorageInterface $cache = null) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>__construct(Laminas\Cache\Storage\StorageInterface $cache = null) : void</code></pre>
 <p>As an example, the following creates an instance which <em>is not</em> backed by cache
 storage:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$memoryManager = new Laminas\Memory\MemoryManager();</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$memoryManager = new Laminas\Memory\MemoryManager();</code></pre>
 <p>While the following creates an instance backed by a filesystem cache storage
 adapter, storing memory blocks in the <code>tmp/</code> directory of the current working
 directory:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Cache\StorageFactory;</span>
-<span class=x>use Laminas\Memory\MemoryManager;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Cache\StorageFactory;
+use Laminas\Memory\MemoryManager;
 
-<span class=x>$cache = StorageFactory::factory([</span>
-<span class=x>    &#39;adapter&#39; =&gt; [</span>
-<span class=x>        &#39;name&#39; =&gt; &#39;Filesystem&#39;,</span>
-<span class=x>        &#39;options&#39; =&gt; [</span>
-<span class=x>            &#39;cache_dir&#39; =&gt; &#39;./tmp/&#39;, // Directory in which to put swapped memory blocks</span>
-<span class=x>        ],</span>
-<span class=x>    ],</span>
-<span class=x>]);</span>
+$cache = StorageFactory::factory([
+    'adapter' =&gt; [
+        'name' =&gt; 'Filesystem',
+        'options' =&gt; [
+            'cache_dir' =&gt; './tmp/', // Directory in which to put swapped memory blocks
+        ],
+    ],
+]);
 
-<span class=x>$memoryManager = new MemoryManager($cache);</span>
-</pre></div></p>
+$memoryManager = new MemoryManager($cache);</code></pre>
 <p>The <code>MemoryManager</code> uses <a href="http://docs.laminas.dev/laminas-cache/storage/adapter/">laminas-cache storage adapters</a>
 to cache memory blocks; if no cache instance is provided, the system temporary
 directory is used. This is useful if you know that memory is not limited or the
@@ -260,41 +261,38 @@ and settings to control memory manager behavior.</p>
 <h3>Creating Movable Objects</h3>
 <p>Create movable objects (objects which may be swapped into cache storage) using
 the <code>Laminas\Memory\MemoryManager::create([$data])</code> method:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$memObject = $memoryManager-&gt;create($data);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$memObject = $memoryManager-&gt;create($data);</code></pre>
 <p>The <code>$data</code> argument is optional and used to initialize the object value. If the
 <code>$data</code> argument is omitted, the value is an empty string.</p>
 <h3>Creating Locked Objects</h3>
 <p>Create locked objects (objects which will never be swapped into cache storage)
 using the <code>Laminas\Memory\MemoryManager::createLocked([$data])</code> method:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$memObject = $memoryManager-&gt;createLocked($data);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$memObject = $memoryManager-&gt;createLocked($data);</code></pre>
 <p>The <code>$data</code> argument is optional and used to initialize the object value. If the
 <code>$data</code> argument is omitted, the value is an empty string.</p>
 <h3>Destroying Objects</h3>
 <p>Memory objects are automatically destroyed and removed from memory when they go
 out of scope:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>function foo() use ($memoryManager, $memList) {</span>
-<span class=x>    // ...</span>
+<pre class=codehilite><code class=language-php>function foo() use ($memoryManager, $memList) {
+    // ...
 
-<span class=x>    $memObject1 = $memoryManager-&gt;create($data1);</span>
-<span class=x>    $memObject2 = $memoryManager-&gt;create($data2);</span>
-<span class=x>    $memObject3 = $memoryManager-&gt;create($data3);</span>
+    $memObject1 = $memoryManager-&gt;create($data1);
+    $memObject2 = $memoryManager-&gt;create($data2);
+    $memObject3 = $memoryManager-&gt;create($data3);
 
-<span class=x>    // ...</span>
+    // ...
 
-<span class=x>    $memList[] = $memObject3;</span>
+    $memList[] = $memObject3;
 
-<span class=x>    // ...</span>
+    // ...
 
-<span class=x>    unset($memObject2); // $memObject2 is destroyed here</span>
+    unset($memObject2); // $memObject2 is destroyed here
 
-<span class=x>    // ...</span>
-<span class=x>    // $memObject1 is destroyed here</span>
-<span class=x>    // but $memObject3 object is still referenced by $memList</span>
-<span class=x>    // and is not destroyed</span>
-<span class=x>}</span>
-</pre></div></p>
+    // ...
+    // $memObject1 is destroyed here
+    // but $memObject3 object is still referenced by $memList
+    // and is not destroyed
+}</code></pre>
 <p>This applies to both movable and locked objects.</p>
 <h2 id="settings">Settings</h2>
 <h3>Memory Limit</h3>
@@ -304,9 +302,8 @@ movable objects.</p>
 then the memory manager swaps some other objects.</p>
 <p>You can retrieve or set the memory limit setting using the <code>getMemoryLimit()</code> and
 <code>setMemoryLimit($newLimit)</code> methods:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$oldLimit = $memoryManager-&gt;getMemoryLimit();  // Get memory limit in bytes</span>
-<span class=x>$memoryManager-&gt;setMemoryLimit($newLimit);     // Set memory limit in bytes</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$oldLimit = $memoryManager-&gt;getMemoryLimit();  // Get memory limit in bytes
+$memoryManager-&gt;setMemoryLimit($newLimit);     // Set memory limit in bytes</code></pre>
 <p>A negative value for memory limit means 'no limit'.</p>
 <p>The default value is two-thirds of the value of <code>memory_limit</code> in <code>php.ini</code> or
 'no limit' (-1) if <code>memory_limit</code> is not set in <code>php.ini</code>.</p>
@@ -316,9 +313,8 @@ cache backend; objects with sizes smaller than this value will not be swapped.
 This reduces the number of swap/load operations.</p>
 <p>You can retrieve or set the minimum size using the <code>getMinSize()</code> and
 <code>setMinSize($newSize)</code> methods:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$oldMinSize = $memoryManager-&gt;getMinSize();  // Get MinSize in bytes</span>
-<span class=x>$memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$oldMinSize = $memoryManager-&gt;getMinSize();  // Get MinSize in bytes
+$memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</code></pre>
 <p>The default minimum size value is 16KB (16384 bytes).</p>
 
 
@@ -447,9 +443,10 @@ This reduces the number of swap/load operations.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -486,7 +483,7 @@ This reduces the number of swap/load operations.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-memory//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-memory/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -495,8 +492,8 @@ This reduces the number of swap/load operations.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-memory//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-memory/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>
