@@ -57,6 +57,6 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "replace": {
-        "zendframework/zend-memory": "self.version"
+        "zendframework/zend-memory": "^2.6.1"
     }
 }
