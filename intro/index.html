@@ -286,13 +286,14 @@ functionality, the memory manager can compose <a href="http://docs.laminas.dev/l
 as storage providers.</p>
 <h2 id="usage">Usage</h2>
 <p>Instantiate the memory manager class:</p>
-<pre class=codehilite><code class=language-php>use Laminas\Memory\MemoryManager;
+<pre class="highlight"><code class="language-php">use Laminas\Memory\MemoryManager;
 
 // No caching backend:
 $memoryManager = new MemoryManager();</code></pre>
+
 <p>Optionally, you can create a cache storage adapter, and pass it to the
 <code>MemoryManager</code> constructor:</p>
-<pre class=codehilite><code class=language-php>use Laminas\Cache\StorageFactory;
+<pre class="highlight"><code class="language-php">use Laminas\Cache\StorageFactory;
 use Laminas\Memory\MemoryManager;
 
 // Use a filesystem adapter, placing memory blocks in the tmp directory
@@ -305,9 +306,10 @@ $cache = StorageFactory::factory([
 ]);
 
 $memoryManager = new MemoryManager($cache);</code></pre>
+
 <p>Once you have a <code>MemoryManager</code> instance, you can start pushing values to it and
 pulling values from it.</p>
-<pre class=codehilite><code class=language-php>$loadedFiles = [];
+<pre class="highlight"><code class="language-php">$loadedFiles = [];
 
 for ($count = 0; $count &lt; 10000; $count++) {
     $f = fopen($fileNames[$count], 'rb');
@@ -322,6 +324,7 @@ echo $loadedFiles[$index1]-&gt;value;
 $loadedFiles[$index2]-&gt;value = $newValue;
 
 $loadedFiles[$index3]-&gt;value[$charIndex] = '_';</code></pre>
+
 <h2 id="theory-of-operation">Theory of Operation</h2>
 <p>laminas-memory operates with the following concepts:</p>
 <ul>
@@ -337,7 +340,7 @@ the application, and returns them wrapped into a memory container object.</p>
 <p>The memory container has a virtual or actual <code>value</code> attribute of type <code>string</code>.
 This attribute contains the data value specified at memory object creation time.</p>
 <p>You can operate with this <code>value</code> attribute as an object property:</p>
-<pre class=codehilite><code class=language-php>$memObject = $memoryManager-&gt;create($data);
+<pre class="highlight"><code class="language-php">$memObject = $memoryManager-&gt;create($data);
 
 echo $memObject-&gt;value;
 
@@ -348,6 +351,7 @@ $memObject-&gt;value[$index] = '_';
 echo ord($memObject-&gt;value[$index1]);
 
 $memObject-&gt;value = substr($memObject-&gt;value, $start, $length);</code></pre>
+
 <h3>Locked memory</h3>
 <p>Locked memory objects are always stored in memory. Data stored in locked memory
 are never swapped to the cache backend.</p>
