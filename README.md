@@ -1,7 +1,6 @@
 # laminas-memory
 
-[![Build Status](https://travis-ci.com/laminas/laminas-memory.svg?branch=master)](https://travis-ci.com/laminas/laminas-memory)
-[![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-memory/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-memory?branch=master)
+[![Build Status](https://github.com/laminas/laminas-memory/workflows/Continuous%20Integration/badge.svg)](https://github.com/laminas/laminas-memory/actions?query=workflow%3A"Continuous+Integration")
 
 laminas-memory manages data in an environment with limited memory.
 
@@ -27,6 +26,6 @@ Browse the documentation online at https://docs.laminas.dev/laminas-memory/
 
 ## Support
 
-* [Issues](https://github.com/laminas/laminas-memory/issues/)
-* [Chat](https://laminas.dev/chat/)
-* [Forum](https://discourse.laminas.dev/)
+- [Issues](https://github.com/laminas/laminas-memory/issues/)
+- [Chat](https://laminas.dev/chat/)
+- [Forum](https://discourse.laminas.dev/)
