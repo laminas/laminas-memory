@@ -25,7 +25,7 @@ class MemoryManagerTest extends TestCase
      */
     private $cache = null;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->cache = CacheFactory::adapterFactory('memory', ['memory_limit' => 0]);
     }
