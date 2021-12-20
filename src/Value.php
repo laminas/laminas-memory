@@ -4,6 +4,7 @@ namespace Laminas\Memory;
 
 use ArrayAccess;
 use Countable;
+use ReturnTypeWillChange;
 
 /**
  * String value object
@@ -63,6 +64,7 @@ class Value implements ArrayAccess, Countable
      *
      * @return int
      */
+    #[ReturnTypeWillChange]
     public function count()
     {
         return strlen($this->value);
@@ -75,6 +77,7 @@ class Value implements ArrayAccess, Countable
      * @param int $offset
      * @return bool
      */
+    #[ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return $offset >= 0 && $offset < strlen($this->value);
@@ -87,6 +90,7 @@ class Value implements ArrayAccess, Countable
      * @param int $offset
      * @return string
      */
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->value[$offset];
@@ -99,6 +103,7 @@ class Value implements ArrayAccess, Countable
      * @param int $offset
      * @param string $char
      */
+    #[ReturnTypeWillChange]
     public function offsetSet($offset, $char)
     {
         $this->value[$offset] = $char;
@@ -115,6 +120,7 @@ class Value implements ArrayAccess, Countable
      *
      * @param int $offset
      */
+    #[ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->value[$offset]);

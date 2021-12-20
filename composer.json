@@ -19,10 +19,11 @@
         "sort-packages": true
     },
     "require": {
-        "php": "^7.3 || ~8.0.0"
+        "php": "^7.4 || ~8.0.0 || ~8.1.0"
     },
     "require-dev": {
-        "laminas/laminas-cache": "^2.7",
+        "laminas/laminas-cache": "^3.0",
+        "laminas/laminas-cache-storage-adapter-memory": "^2.0",
         "laminas/laminas-coding-standard": "~1.0.0",
         "phpunit/phpunit": "^9.3"
     },

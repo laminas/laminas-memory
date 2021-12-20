@@ -2,8 +2,7 @@
 
 namespace LaminasTest\Memory;
 
-use Laminas\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
-use Laminas\Cache\StorageFactory as CacheFactory;
+use Laminas\Cache\Storage\StorageInterface as CacheAdapter;
 use Laminas\Memory;
 use PHPUnit\Framework\TestCase;
 
@@ -21,7 +20,7 @@ class MemoryManagerTest extends TestCase
 
     public function setUp(): void
     {
-        $this->cache = CacheFactory::adapterFactory('memory', ['memory_limit' => 0]);
+        $this->cache = new \Laminas\Cache\Storage\Adapter\Memory(['memory_limit' => 0]);
     }
 
     /**
