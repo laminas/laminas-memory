@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\Memory;
 
 use ArrayAccess;
 use Countable;
 use ReturnTypeWillChange;
+
+use function strlen;
 
 /**
  * String value object
@@ -24,7 +28,7 @@ class Value implements ArrayAccess, Countable
     /**
      * Container
      *
-     * @var Container\Movable
+     * @var Movable
      */
     private $container;
 
@@ -35,12 +39,10 @@ class Value implements ArrayAccess, Countable
      */
     private $trace;
 
-
     /**
      * Object constructor
      *
      * @param string $value
-     * @param \Laminas\Memory\Container\Movable $container
      */
     public function __construct($value, Container\Movable $container)
     {
@@ -148,6 +150,7 @@ class Value implements ArrayAccess, Countable
      * or _may_ be used for performance considerations
      *
      * @internal
+     *
      * @return string
      */
     public function &getRef()

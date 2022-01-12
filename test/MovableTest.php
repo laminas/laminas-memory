@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Memory;
 
 use Laminas\Memory;
@@ -17,7 +19,7 @@ class MovableTest extends TestCase
     public function testCreation()
     {
         $memoryManager = new TestAsset\DummyMemoryManager();
-        $memObject = new Container\Movable($memoryManager, 10, '0123456789');
+        $memObject     = new Container\Movable($memoryManager, 10, '0123456789');
 
         $this->assertInstanceOf(Container\Movable::class, $memObject);
     }
@@ -28,12 +30,12 @@ class MovableTest extends TestCase
     public function testValueAccess()
     {
         $memoryManager = new TestAsset\DummyMemoryManager();
-        $memObject = new Container\Movable($memoryManager, 10, '0123456789');
+        $memObject     = new Container\Movable($memoryManager, 10, '0123456789');
 
         // getRef() method
         $this->assertEquals($memObject->getRef(), '0123456789');
 
-        $valueRef = &$memObject->getRef();
+        $valueRef    = &$memObject->getRef();
         $valueRef[3] = '_';
         $this->assertEquals($memObject->getRef(), '012_456789');
 
@@ -54,7 +56,7 @@ class MovableTest extends TestCase
     public function testLock()
     {
         $memoryManager = new TestAsset\DummyMemoryManager();
-        $memObject = new Container\Movable($memoryManager, 10, '0123456789');
+        $memObject     = new Container\Movable($memoryManager, 10, '0123456789');
 
         $this->assertFalse($memObject->isLocked());
 
@@ -71,7 +73,7 @@ class MovableTest extends TestCase
     public function testTouch()
     {
         $memoryManager = new TestAsset\DummyMemoryManager();
-        $memObject = new Container\Movable($memoryManager, 10, '0123456789');
+        $memObject     = new Container\Movable($memoryManager, 10, '0123456789');
 
         $this->assertFalse($memoryManager->processUpdatePassed);
 
@@ -88,7 +90,7 @@ class MovableTest extends TestCase
     public function testValueUpdateTracing()
     {
         $memoryManager = new TestAsset\DummyMemoryManager();
-        $memObject = new Container\Movable($memoryManager, 10, '0123456789');
+        $memObject     = new Container\Movable($memoryManager, 10, '0123456789');
 
         // startTrace() method is usually invoked by memory manager, when it need to be notified
         // about value update
@@ -106,7 +108,7 @@ class MovableTest extends TestCase
     public function testInvalidGetThrowException()
     {
         $memoryManager = new TestAsset\DummyMemoryManager();
-        $memObject = new Container\Movable($memoryManager, 10, '0123456789');
+        $memObject     = new Container\Movable($memoryManager, 10, '0123456789');
         $this->expectException(Memory\Exception\InvalidArgumentException::class);
         $value = $memObject->unknowProperty;
     }
@@ -114,7 +116,7 @@ class MovableTest extends TestCase
     public function testInvalidSetThrowException()
     {
         $memoryManager = new TestAsset\DummyMemoryManager();
-        $memObject = new Container\Movable($memoryManager, 10, '0123456789');
+        $memObject     = new Container\Movable($memoryManager, 10, '0123456789');
         $this->expectException(Memory\Exception\InvalidArgumentException::class);
         $memObject->unknowProperty = 5;
     }

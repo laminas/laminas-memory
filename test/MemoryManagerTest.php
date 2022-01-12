@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Memory;
 
 use Laminas\Cache\Storage\StorageInterface as CacheAdapter;
 use Laminas\Memory;
 use PHPUnit\Framework\TestCase;
+
+use function str_repeat;
 
 /**
  * @group      Laminas_Memory
@@ -16,7 +20,7 @@ class MemoryManagerTest extends TestCase
      *
      * @var CacheAdapter
      */
-    private $cache = null;
+    private $cache;
 
     public function setUp(): void
     {
@@ -47,12 +51,12 @@ class MemoryManagerTest extends TestCase
         $memoryManager = new Memory\MemoryManager($this->cache);
 
         // MemoryLimit
-        $memoryManager->setMemoryLimit(2 * 1024 * 1024 /* 2Mb */);
+        $memoryManager->setMemoryLimit(2 * 1024 * 1024); /* 2Mb */
         $this->assertEquals($memoryManager->getMemoryLimit(), 2 * 1024 * 1024);
 
         // MinSize
         $this->assertEquals($memoryManager->getMinSize(), 16 * 1024); // check for default value (16K)
-        $memoryManager->setMinSize(4 * 1024 /* 4Kb */);
+        $memoryManager->setMinSize(4 * 1024); /* 4Kb */
         $this->assertEquals($memoryManager->getMinSize(), 4 * 1024);
     }
 
@@ -92,12 +96,12 @@ class MemoryManagerTest extends TestCase
 
         $memObjects = [];
         for ($count = 0; $count < 64; $count++) {
-            $memObject = $memoryManager->create(str_repeat((string)($count % 10), 1024) /* 1K */);
+            $memObject    = $memoryManager->create(str_repeat((string) ($count % 10), 1024)); /* 1K */
             $memObjects[] = $memObject;
         }
 
         for ($count = 0; $count < 64; $count += 2) {
-            $this->assertEquals($memObjects[$count]->value[16], (string)($count % 10));
+            $this->assertEquals($memObjects[$count]->value[16], (string) ($count % 10));
         }
 
         for ($count = 63; $count > 0; $count -= 2) {
@@ -118,7 +122,7 @@ class MemoryManagerTest extends TestCase
 
         $memObjects = [];
         for ($count = 0; $count < 8; $count++) {
-            $memObject = $memoryManager->create(str_repeat((string)($count % 10), 128) /* 1K */);
+            $memObject    = $memoryManager->create(str_repeat((string) ($count % 10), 128)); /* 1K */
             $memObjects[] = $memObject;
         }
 
