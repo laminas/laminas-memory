@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\Memory\Container;
 
 use Laminas\Memory;
 use Laminas\Memory\Exception;
+
+use function sprintf;
 
 /**
  * Memory value container
@@ -22,21 +26,21 @@ class Movable extends AbstractContainer
     /**
      * Memory manager reference
      *
-     * @var \Laminas\Memory\MemoryManager
+     * @var Memory\MemoryManager
      */
     private $memManager;
 
     /**
      * Value object
      *
-     * @var \Laminas\Memory\Value
+     * @var Memory\Value
      */
     private $value;
 
     /** Value states */
-    const LOADED   = 1;
-    const SWAPPED  = 2;
-    const LOCKED   = 4;
+    public const LOADED  = 1;
+    public const SWAPPED = 2;
+    public const LOCKED  = 4;
 
     /**
      * Value state (LOADED/SWAPPED/LOCKED)
@@ -48,16 +52,15 @@ class Movable extends AbstractContainer
     /**
      * Object constructor
      *
-     * @param \Laminas\Memory\MemoryManager $memoryManager
      * @param int $id
      * @param string $value
      */
     public function __construct(Memory\MemoryManager $memoryManager, $id, $value)
     {
         $this->memManager = $memoryManager;
-        $this->id    = $id;
-        $this->state = self::LOADED;
-        $this->value = new Memory\Value($value, $this);
+        $this->id         = $id;
+        $this->state      = self::LOADED;
+        $this->value      = new Memory\Value($value, $this);
     }
 
     /**
@@ -65,6 +68,7 @@ class Movable extends AbstractContainer
      */
     public function lock()
     {
+        // phpcs:ignore WebimpressCodingStandard.Formatting.Reference.UnexpectedSpace
         if (! ($this->state & self::LOADED)) {
             $this->memManager->load($this, $this->id);
             $this->state |= self::LOADED;
@@ -95,6 +99,7 @@ class Movable extends AbstractContainer
      */
     public function isLocked()
     {
+        // phpcs:ignore WebimpressCodingStandard.Formatting.Reference.UnexpectedSpace
         return (bool) ($this->state & self::LOCKED);
     }
 
@@ -110,14 +115,15 @@ class Movable extends AbstractContainer
      */
     public function __get($property)
     {
-        if ($property != 'value') {
+        if ($property !== 'value') {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Unknown property: %s::$%s',
-                __CLASS__,
+                self::class,
                 $property
             ));
         }
 
+        // phpcs:ignore WebimpressCodingStandard.Formatting.Reference.UnexpectedSpace
         if (! ($this->state & self::LOADED)) {
             $this->memManager->load($this, $this->id);
             $this->state |= self::LOADED;
@@ -135,10 +141,10 @@ class Movable extends AbstractContainer
      */
     public function __set($property, $value)
     {
-        if ($property != 'value') {
+        if ($property !== 'value') {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Unknown property: %s::$%s',
-                __CLASS__,
+                self::class,
                 $property
             ));
         }
@@ -149,17 +155,17 @@ class Movable extends AbstractContainer
         $this->memManager->processUpdate($this, $this->id);
     }
 
-
     /**
      * Get string value reference
      *
      * _Must_ be used for value access before PHP v 5.2
      * or _may_ be used for performance considerations
      *
-     * @return &string
+     * @return string
      */
     public function &getRef()
     {
+        // phpcs:ignore WebimpressCodingStandard.Formatting.Reference.UnexpectedSpace
         if (! ($this->state & self::LOADED)) {
             $this->memManager->load($this, $this->id);
             $this->state |= self::LOADED;
@@ -199,6 +205,7 @@ class Movable extends AbstractContainer
      */
     public function startTrace()
     {
+        // phpcs:ignore WebimpressCodingStandard.Formatting.Reference.UnexpectedSpace
         if (! ($this->state & self::LOADED)) {
             $this->memManager->load($this, $this->id);
             $this->state |= self::LOADED;
@@ -211,6 +218,8 @@ class Movable extends AbstractContainer
      * Set value (used by memory manager when value is loaded)
      *
      * @internal
+     *
+     * @param string $value
      */
     public function setValue($value)
     {
@@ -245,10 +254,12 @@ class Movable extends AbstractContainer
      * Check if object is marked as swapped
      *
      * @internal
+     *
      * @return bool
      */
     public function isSwapped()
     {
+        // phpcs:ignore WebimpressCodingStandard.Formatting.Reference.UnexpectedSpace
         return $this->state & self::SWAPPED;
     }
 
@@ -256,12 +267,14 @@ class Movable extends AbstractContainer
      * Get object id
      *
      * @internal
+     *
      * @return int
      */
     public function getId()
     {
         return $this->id;
     }
+
     /**
      * Destroy memory container and remove it from memory manager list
      *

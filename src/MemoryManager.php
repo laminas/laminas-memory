@@ -1,10 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\Memory;
 
 use Laminas\Cache\Storage\ClearByNamespaceInterface as ClearByNamespaceCacheStorage;
 use Laminas\Cache\Storage\FlushableInterface as FlushableCacheStorage;
 use Laminas\Cache\Storage\StorageInterface as CacheStorage;
+
+use function ini_get;
+use function str_replace;
+use function strlen;
+use function strtolower;
+use function trim;
+use function uniqid;
 
 /**
  * Memory manager
@@ -19,7 +28,7 @@ class MemoryManager
      *
      * @var CacheStorage
      */
-    private $cache = null;
+    private $cache;
 
     /**
      * Memory grow limit.
@@ -86,9 +95,9 @@ class MemoryManager
      * object.
      * So we have to trace only _first_ object modification and do nothing for others
      *
-     * @var \Laminas\Memory\Container\Movable
+     * @var Container\Movable
      */
-    private $lastModified = null;
+    private $lastModified;
 
     /**
      * Unique memory manager id
@@ -115,10 +124,8 @@ class MemoryManager
      * Memory manager constructor
      *
      * If cache is not specified, then memory objects are never swapped
-     *
-     * @param  CacheStorage $cache
      */
-    public function __construct(CacheStorage $cache = null)
+    public function __construct(?CacheStorage $cache = null)
     {
         if ($cache === null) {
             return;
@@ -128,7 +135,7 @@ class MemoryManager
         $this->generateMemManagerId();
 
         $memoryLimitStr = trim(ini_get('memory_limit'));
-        if ($memoryLimitStr != '' && $memoryLimitStr != -1) {
+        if ($memoryLimitStr !== '' && $memoryLimitStr !== -1) {
             $this->memoryLimit = (int) $memoryLimitStr;
             switch (strtolower($memoryLimitStr[strlen($memoryLimitStr) - 1])) {
                 case 'g':
@@ -145,7 +152,9 @@ class MemoryManager
             }
 
             $this->memoryLimit = (int) ($this->memoryLimit * 2 / 3);
-        } // No limit otherwise
+        }
+
+        // No limit otherwise
     }
 
     /**
@@ -244,7 +253,7 @@ class MemoryManager
         $id = $this->nextId++;
 
         // Use only memory locked objects if backend is not specified
-        if ($locked  || ($this->cache === null)) {
+        if ($locked || ($this->cache === null)) {
             return new Container\Locked($value);
         }
 
@@ -268,7 +277,7 @@ class MemoryManager
      * Used by Memory container destroy() method
      *
      * @internal
-     * @param Container\Movable $container
+     *
      * @param int $id
      * @return null
      */
@@ -293,7 +302,7 @@ class MemoryManager
      * Process value update
      *
      * @internal
-     * @param \Laminas\Memory\Container\Movable $container
+     *
      * @param int $id
      */
     public function processUpdate(Container\Movable $container, $id)
@@ -336,7 +345,8 @@ class MemoryManager
         $id = $container->getId();
 
         // Calculate new object size and increase used memory size by this value
-        $this->memorySize += ($this->sizes[$id] = strlen($container->getRef()));
+        $this->sizes[$id]  = strlen($container->getRef());
+        $this->memorySize += $this->sizes[$id];
 
         if ($this->sizes[$id] > $this->minSize) {
             // Move object to "unload candidates list"
@@ -355,7 +365,7 @@ class MemoryManager
      */
     private function swapCheck()
     {
-        if ($this->memoryLimit < 0  ||  $this->memorySize < $this->memoryLimit) {
+        if ($this->memoryLimit < 0 || $this->memorySize < $this->memoryLimit) {
             // Memory limit is not reached
             // Do nothing
             return;
@@ -380,7 +390,6 @@ class MemoryManager
      * Actually swaps data or only unloads it from memory,
      * if object is not changed since last swap
      *
-     * @param \Laminas\Memory\Container\Movable $container
      * @param int $id
      */
     private function swap(Container\Movable $container, $id)
@@ -403,7 +412,7 @@ class MemoryManager
      * Load value from swap file.
      *
      * @internal
-     * @param \Laminas\Memory\Container\Movable $container
+     *
      * @param int $id
      */
     public function load(Container\Movable $container, $id)
