@@ -72,8 +72,9 @@ class LockedTest extends TestCase
     {
         $memObject = new Container\Locked('0123456789');
 
+        // Does nothing
         $memObject->touch();
 
-        // Nothing to check
+        $this->assertEquals(new Container\Locked('0123456789'), $memObject);
     }
 }
