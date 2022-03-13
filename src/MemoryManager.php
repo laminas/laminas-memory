@@ -135,7 +135,7 @@ class MemoryManager
         $this->generateMemManagerId();
 
         $memoryLimitStr = trim(ini_get('memory_limit'));
-        if ($memoryLimitStr !== '' && $memoryLimitStr !== -1) {
+        if ($memoryLimitStr !== '' && $memoryLimitStr !== '-1') {
             $this->memoryLimit = (int) $memoryLimitStr;
             switch (strtolower($memoryLimitStr[strlen($memoryLimitStr) - 1])) {
                 case 'g':
