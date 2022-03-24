@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Memory;
 
-use Laminas\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
-use Laminas\Cache\StorageFactory as CacheFactory;
+use Laminas\Cache\Storage\StorageInterface as CacheAdapter;
 use Laminas\Memory;
 use PHPUnit\Framework\TestCase;
 
@@ -17,11 +18,11 @@ class AccessControllerTest extends TestCase
      *
      * @var CacheAdapter
      */
-    private $cache = null;
+    private $cache;
 
     public function setUp(): void
     {
-        $this->cache = CacheFactory::adapterFactory('memory', ['memory_limit' => 0]);
+        $this->cache = new \Laminas\Cache\Storage\Adapter\Memory(['memory_limit' => 0]);
     }
 
     /**
@@ -29,8 +30,8 @@ class AccessControllerTest extends TestCase
      */
     public function testCreation()
     {
-        $memoryManager  = new Memory\MemoryManager($this->cache);
-        $memObject      = $memoryManager->create('012345678');
+        $memoryManager = new Memory\MemoryManager($this->cache);
+        $memObject     = $memoryManager->create('012345678');
 
         $this->assertInstanceOf(Memory\Container\AccessController::class, $memObject);
     }
@@ -40,13 +41,13 @@ class AccessControllerTest extends TestCase
      */
     public function testValueAccess()
     {
-        $memoryManager  = new Memory\MemoryManager($this->cache);
-        $memObject      = $memoryManager->create('0123456789');
+        $memoryManager = new Memory\MemoryManager($this->cache);
+        $memObject     = $memoryManager->create('0123456789');
 
         // getRef() method
         $this->assertEquals($memObject->getRef(), '0123456789');
 
-        $valueRef = &$memObject->getRef();
+        $valueRef    = &$memObject->getRef();
         $valueRef[3] = '_';
         $this->assertEquals($memObject->getRef(), '012_456789');
 
@@ -66,8 +67,8 @@ class AccessControllerTest extends TestCase
      */
     public function testLock()
     {
-        $memoryManager  = new Memory\MemoryManager($this->cache);
-        $memObject      = $memoryManager->create('012345678');
+        $memoryManager = new Memory\MemoryManager($this->cache);
+        $memObject     = $memoryManager->create('012345678');
 
         $this->assertFalse((bool) $memObject->isLocked());
 
