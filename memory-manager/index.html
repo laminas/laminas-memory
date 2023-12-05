@@ -5,7 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Manage data in an environment with limited memory">  
+    <meta name="description" content="Manage data in an environment with limited memory"> 
+
+    
+    
+    <meta name="docsearch:version" content="latest">
+    <meta name="docsearch:language" content="en">
+    <meta name="docsearch:component" content="laminas-memory">
+
     <link rel="canonical" href="https://docs.laminas.dev/laminas-memory/memory-manager/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
@@ -203,14 +210,14 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
                     <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
                         <i class="fa fa-search"></i> Search
                     </a>
-                    <a href="https://github.com/laminas/laminas-memory/" class="header__link header__link--github" title="Go to repository of laminas-memory">
+                    <a href="https://github.com/laminas/laminas-memory" class="header__link header__link--github" title="Go to repository of laminas-memory">
                         <i class="fa fa-github"></i> GitHub
                     </a>
                 
@@ -291,11 +298,9 @@
 <h2 id="creating-a-memory-manager">Creating a Memory Manager</h2>
 <p>You can create new a memory manager (<code>Laminas\Memory\MemoryManager</code> object) using its constructor:</p>
 <pre class="highlight"><code class="language-php">__construct(Laminas\Cache\Storage\StorageInterface $cache = null) : void</code></pre>
-
 <p>As an example, the following creates an instance which <em>is not</em> backed by cache
 storage:</p>
 <pre class="highlight"><code class="language-php">$memoryManager = new Laminas\Memory\MemoryManager();</code></pre>
-
 <p>While the following creates an instance backed by a filesystem cache storage
 adapter, storing memory blocks in the <code>tmp/</code> directory of the current working
 directory:</p>
@@ -312,7 +317,6 @@ $cache = StorageFactory::factory([
 ]);
 
 $memoryManager = new MemoryManager($cache);</code></pre>
-
 <p>The <code>MemoryManager</code> uses <a href="http://docs.laminas.dev/laminas-cache/storage/adapter/">laminas-cache storage adapters</a>
 to cache memory blocks; if no cache instance is provided, the system temporary
 directory is used. This is useful if you know that memory is not limited or the
@@ -320,21 +324,19 @@ overall size of objects never reaches the memory limit.</p>
 <h2 id="managing-memory-objects">Managing Memory Objects</h2>
 <p>This section describes creating and destroying objects in the managed memory,
 and settings to control memory manager behavior.</p>
-<h3>Creating Movable Objects</h3>
+<h3 id="creating-movable-objects">Creating Movable Objects</h3>
 <p>Create movable objects (objects which may be swapped into cache storage) using
 the <code>Laminas\Memory\MemoryManager::create([$data])</code> method:</p>
 <pre class="highlight"><code class="language-php">$memObject = $memoryManager-&gt;create($data);</code></pre>
-
 <p>The <code>$data</code> argument is optional and used to initialize the object value. If the
 <code>$data</code> argument is omitted, the value is an empty string.</p>
-<h3>Creating Locked Objects</h3>
+<h3 id="creating-locked-objects">Creating Locked Objects</h3>
 <p>Create locked objects (objects which will never be swapped into cache storage)
 using the <code>Laminas\Memory\MemoryManager::createLocked([$data])</code> method:</p>
 <pre class="highlight"><code class="language-php">$memObject = $memoryManager-&gt;createLocked($data);</code></pre>
-
 <p>The <code>$data</code> argument is optional and used to initialize the object value. If the
 <code>$data</code> argument is omitted, the value is an empty string.</p>
-<h3>Destroying Objects</h3>
+<h3 id="destroying-objects">Destroying Objects</h3>
 <p>Memory objects are automatically destroyed and removed from memory when they go
 out of scope:</p>
 <pre class="highlight"><code class="language-php">function foo() use ($memoryManager, $memList) {
@@ -357,10 +359,9 @@ out of scope:</p>
     // but $memObject3 object is still referenced by $memList
     // and is not destroyed
 }</code></pre>
-
 <p>This applies to both movable and locked objects.</p>
 <h2 id="settings">Settings</h2>
-<h3>Memory Limit</h3>
+<h3 id="memory-limit">Memory Limit</h3>
 <p>The memory limit is the maximum number of bytes allowed for use by loaded
 movable objects.</p>
 <p>If loading or creation of an object causes memory usage to exceed of this limit,
@@ -369,11 +370,10 @@ then the memory manager swaps some other objects.</p>
 <code>setMemoryLimit($newLimit)</code> methods:</p>
 <pre class="highlight"><code class="language-php">$oldLimit = $memoryManager-&gt;getMemoryLimit();  // Get memory limit in bytes
 $memoryManager-&gt;setMemoryLimit($newLimit);     // Set memory limit in bytes</code></pre>
-
 <p>A negative value for memory limit means 'no limit'.</p>
 <p>The default value is two-thirds of the value of <code>memory_limit</code> in <code>php.ini</code> or
 'no limit' (-1) if <code>memory_limit</code> is not set in <code>php.ini</code>.</p>
-<h3>MinSize</h3>
+<h3 id="minsize">MinSize</h3>
 <p>The <code>MinSize</code> is the minimum size an object must be before it will be swapped to a
 cache backend; objects with sizes smaller than this value will not be swapped.
 This reduces the number of swap/load operations.</p>
@@ -381,7 +381,6 @@ This reduces the number of swap/load operations.</p>
 <code>setMinSize($newSize)</code> methods:</p>
 <pre class="highlight"><code class="language-php">$oldMinSize = $memoryManager-&gt;getMinSize();  // Get MinSize in bytes
 $memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</code></pre>
-
 <p>The default minimum size value is 16KB (16384 bytes).</p>
 
 
@@ -394,7 +393,9 @@ $memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</c
         <li class="page-nav__item">
             
                 <a rel="prev" class="page-nav__link page-nav__link--prev" href="../intro/">
-                    <i class="fa fa-chevron-left"></i> Previous
+                    <small class="page-nav__label">Previous</small>
+                    <i class="fa fa-chevron-left"></i>
+                    Introduction
                 </a>
             
         </li>
@@ -403,7 +404,9 @@ $memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</c
         <li class="page-nav__item">
             
                 <a rel="next" class="page-nav__link page-nav__link--next" href="../memory-objects/">
-                    Next <i class="fa fa-chevron-right"></i>
+                    <small class="page-nav__label">Next</small>
+                    Memory Objects
+                    <i class="fa fa-chevron-right"></i>
                 </a>
             
         </li>
@@ -411,16 +414,6 @@ $memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</c
 </nav>
 
 
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-memory/edit/master/docs/book/memory-manager.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
 
                 
             </div>
@@ -498,6 +491,7 @@ $memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</c
         </ul>
     </div>
 
+                    
                 
             </div>
         </div>
@@ -560,7 +554,7 @@ $memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</c
                         <h4 class="footer__headline">License</h4>
                         <p>
                             Code licensed under <a
-                                href="https://github.com/laminas/laminas-memory/blob/master/LICENSE.md">BSD 3-Clause</a>.
+                                href="https://github.com/laminas/laminas-memory/blob/-/LICENSE.md">BSD 3-Clause</a>.
                         </p>
                     </div>
 
@@ -570,7 +564,7 @@ $memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</c
                         <p>
                             <!--Built with love by the Laminas team with the help of our
                             <a href="https://github.com/laminas/laminas-memory/graphs/contributors">contributors</a>.<br>-->
-                            &copy; 2020 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                            &copy; 2023 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
                         </p>
                     </div>
                 </div>
