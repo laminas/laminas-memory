@@ -30,7 +30,7 @@
     "require-dev": {
         "laminas/laminas-cache": "^3.0",
         "laminas/laminas-cache-storage-adapter-memory": "^2.0",
-        "laminas/laminas-coding-standard": "~2.3.0",
+        "laminas/laminas-coding-standard": "~2.5.0",
         "phpunit/phpunit": "^9.5"
     },
     "suggest": {

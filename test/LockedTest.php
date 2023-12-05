@@ -70,6 +70,8 @@ class LockedTest extends TestCase
      */
     public function testTouch()
     {
+        self::expectNotToPerformAssertions();
+
         $memObject = new Container\Locked('0123456789');
 
         $memObject->touch();
