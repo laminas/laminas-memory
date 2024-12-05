@@ -69,8 +69,8 @@ laminas-memory operates with the following concepts:
 
 - Memory manager
 - Memory container
-  - Locked memory object
-  - Movable memory object
+    - Locked memory object
+    - Movable memory object
 
 ### Memory manager
 
